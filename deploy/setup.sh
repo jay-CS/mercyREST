@@ -3,7 +3,7 @@
 set -e
 
 # TODO: Set to URL of git repo.
-PROJECT_GIT_URL='https://github.com/jay-CS/mercy-Server.git'
+PROJECT_GIT_URL='https://github.com/jay-CS/mercyREST.git'
 
 PROJECT_BASE_PATH='/usr/local/apps/mercyREST'
 
@@ -29,15 +29,15 @@ $PROJECT_BASE_PATH/env/bin/python manage.py migrate
 $PROJECT_BASE_PATH/env/bin/python manage.py collectstatic --noinput
 
 # Configure supervisor
-cp $PROJECT_BASE_PATH/deploy/supervisor_profiles_api.conf /etc/supervisor/conf.d/profiles_api.conf
+cp $PROJECT_BASE_PATH/deploy/supervisor_mercyApp.conf /etc/supervisor/conf.d/mercyApp.conf
 supervisorctl reread
 supervisorctl update
 supervisorctl restart profiles_api
 
 # Configure nginx
-cp $PROJECT_BASE_PATH/deploy/nginx_profiles_api.conf /etc/nginx/sites-available/profiles_api.conf
+cp $PROJECT_BASE_PATH/deploy/nginx_mercyApp.conf /etc/nginx/sites-available/mercyApp.conf
 rm /etc/nginx/sites-enabled/default
-ln -s /etc/nginx/sites-available/profiles_api.conf /etc/nginx/sites-enabled/profiles_api.conf
+ln -s /etc/nginx/sites-available/mercyApp.conf /etc/nginx/sites-enabled/mercyApp.conf
 systemctl restart nginx.service
 
 echo "DONE! :)"
