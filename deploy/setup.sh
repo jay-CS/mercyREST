@@ -32,7 +32,7 @@ $PROJECT_BASE_PATH/env/bin/python manage.py collectstatic --noinput
 cp $PROJECT_BASE_PATH/deploy/supervisor_mercyApp.conf /etc/supervisor/conf.d/mercyApp.conf
 supervisorctl reread
 supervisorctl update
-supervisorctl restart profiles_api
+supervisorctl restart mercyREST
 
 # Configure nginx
 cp $PROJECT_BASE_PATH/deploy/nginx_mercyApp.conf /etc/nginx/sites-available/mercyApp.conf
